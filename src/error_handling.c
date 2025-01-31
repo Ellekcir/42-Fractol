@@ -6,20 +6,29 @@
 /*   By: rgriffit <rgriffit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 00:23:42 by rgriffit          #+#    #+#             */
-/*   Updated: 2025/01/10 23:45:10 by rgriffit         ###   ########.fr       */
+/*   Updated: 2025/01/31 20:24:56 by rgriffit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// NORMINETTE CHECKED
+
 #include "../inc/fractol.h"
 
+// Error Message - User instruction
 void	error_params(void)
 {
-	ft_printf("Please enter \n\n\t\"./fractol mandelbrot\"\nor\n\t\"./fractol julia <value_1> <value_2>\"\n\n The values will be the two coordinates of the point in the complex plane.");
-	exit(1);
+	ft_printf("Usage:\n\n");
+	ft_printf("\t\"./fractol mandelbrot\"\n");
+	ft_printf("\tOR\n");
+	ft_printf("\t\"./fractol julia <value_1> <value_2>\"\n\n");
+	ft_printf("Note: The values represent the coordinates of ");
+	ft_printf("a point in the complex plane.\n");
+	exit(EXIT_FAILURE);
 }
 
+// Error Message - Malloc fail
 void	error_malloc(void)
 {
 	perror("Problems with Malloc");
-	exit(1);
+	exit(EXIT_FAILURE);
 }
