@@ -6,7 +6,7 @@
 /*   By: rgriffit <rgriffit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 00:23:42 by rgriffit          #+#    #+#             */
-/*   Updated: 2025/01/22 15:46:48 by rgriffit         ###   ########.fr       */
+/*   Updated: 2025/01/31 21:34:36 by rgriffit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,17 @@ void	to_lowercase(char *s)
 	}
 }
 
+static void	ft_sign(const char *str, int *sign)
+{
+	*sign = 1;
+	if (*str == '-')
+	{
+		*sign = -1;
+		str++;
+	}
+	else if (*str == '+')
+		str++;
+}
 
 // ALPHA TO DOUBLE
 // similar to atoi, but dealing with floats
@@ -58,13 +69,7 @@ double	atodbl(const char *str)
 	sign = 1;
 	while ((*str >= 9 && *str <= 13) || *str == ' ')
 		str++;
-	if (*str == '-')
-	{
-		sign = -1;
-		str++;
-	}
-	else if (*str == '+')
-		str++;
+	ft_sign(str, &sign);
 	while (*str >= '0' && *str <= '9')
 		whole_part = whole_part * 10 + (*str++ - '0');
 	if (*str == '.')
