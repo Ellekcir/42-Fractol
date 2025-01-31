@@ -56,14 +56,14 @@ RESET       = \033[0m
 all: $(LIBFT) $(MLX) $(OBJ_DIR) $(NAME)
 
 $(LIBFT):
-	@echo "$(CYAN)$(LIBFT_NAME): Building...$(RESET)"
+	@echo "$(CYAN)$(LIBFT_NAME): Making...$(RESET)"
 	@$(LIBFT_MAKE)
-	@echo "$(GREEN)$(LIBFT_NAME): Built successfully!$(RESET)"
+	@echo "$(GREEN)$(LIBFT_NAME): Made successfully!$(RESET)"
 
 $(MLX):
-	@echo "$(CYAN)$(MLX_NAME): Building...$(RESET)"
+	@echo "$(CYAN)$(MLX_NAME): Making...$(RESET)"
 	@$(MLX_MAKE)
-	@echo "$(GREEN)$(MLX_NAME): Built successfully!$(RESET)"
+	@echo "$(GREEN)$(MLX_NAME): Made successfully!$(RESET)"
 
 $(OBJ_DIR):
 	@$(MKDIR) $(OBJ_DIR)
@@ -73,10 +73,13 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_DIR)/fractol.h
 
 
 $(NAME): $(OBJ)
-	@echo "$(CYAN)$(NAME): Linking...$(RESET)"
+	@echo "$(CYAN)$(NAME): Making...$(RESET)"
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX_LINK) -o $(NAME)
-	@echo "$(GREEN)$(NAME): Built successfully!$(RESET)"
-	@echo "$(GREEN)Run with ./$(NAME) mandelbrot or ./$(NAME) julia <x> <y>$(RESET)"
+	@echo "$(GREEN)$(NAME): Made successfully!$(RESET)"
+	@echo "\n$(GREEN)Please run with:\n"
+	@echo "\t$(RESET)./$(NAME) mandelbrot"
+	@echo "$(GREEN) or"
+	@echo "\t$(RESET)./$(NAME) julia <x-coordinate> <y-coordinate> \n $(RESET)"
 
 clean:
 	@$(RM) $(OBJ_DIR)
