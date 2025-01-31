@@ -6,7 +6,7 @@
 /*   By: rgriffit <rgriffit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 00:23:42 by rgriffit          #+#    #+#             */
-/*   Updated: 2025/01/17 19:18:57 by rgriffit         ###   ########.fr       */
+/*   Updated: 2025/01/31 21:46:52 by rgriffit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 int	close_handler(t_fractal *fractal)
 {
 	mlx_destroy_image(fractal->mlx_connection,
-					fractal->image.image_ptr);
+		fractal->image.image_ptr);
 	mlx_destroy_window(fractal->mlx_connection,
-						fractal->mlx_window);
-	#ifdef __linux__
-    mlx_destroy_display(fractal->mlx_connection);
-	#endif
+		fractal->mlx_window);
+#ifdef __linux__
+	mlx_destroy_display(fractal->mlx_connection);
+#endif
 	free(fractal->mlx_connection);
 	exit(0);
 }
@@ -49,15 +49,14 @@ int	key_handler(int keysym, t_fractal *fractal)
 		fractal->iteration_definition += 10;
 	else if (keysym == KEY_MINUS)
 		fractal->iteration_definition -= 10;
-
-	// Re-render the fractal after state changes
 	render_fractal(fractal);
 	return (0);
 }
 
 // Mouse event handler
 // Handles mouse wheel input for zooming in and out.
-// button: The mouse button pressed (e.g., Button4 for zoom in, Button5 for zoom out)
+// button: The mouse button pressed (e.g., 
+//Button4 for zoom in, Button5 for zoom out)
 // x, y: Mouse coordinates
 // Re-render the fractal after zoom changes
 int	mouse_handler(int button, int x, int y, t_fractal *fractal)
@@ -72,7 +71,6 @@ int	mouse_handler(int button, int x, int y, t_fractal *fractal)
 	return (0);
 }
 
-
 // Mouse tracking for Julia set
 // Dynamically updates the Julia set parameters based on mouse movement.
 // x, y: Mouse coordinates
@@ -80,8 +78,10 @@ int	julia_track(int x, int y, t_fractal *fractal)
 {
 	if (!ft_strncmp(fractal->name, "julia", 5))
 	{
-		fractal->julia_x = (map(x, -2, +2, 0, WIDTH) * fractal->zoom) + fractal->shift_x;
-		fractal->julia_y = (map(y, +2, -2, 0, HEIGHT) * fractal->zoom) + fractal->shift_y;
+		fractal->julia_x = (map(x, -2, +2, 0, WIDTH)
+				* fractal->zoom) + fractal->shift_x;
+		fractal->julia_y = (map(y, +2, -2, 0, HEIGHT)
+				* fractal->zoom) + fractal->shift_y;
 		render_fractal(fractal);
 	}
 	return (0);
