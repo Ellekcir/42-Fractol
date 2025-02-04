@@ -6,7 +6,7 @@
 /*   By: rgriffit <rgriffit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 21:20:45 by rgriffit          #+#    #+#             */
-/*   Updated: 2025/02/04 12:44:17 by rgriffit         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:34:30 by rgriffit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,14 +150,9 @@ typedef struct s_fractal
 	int		iteration_definition;
 	double	shift_x;
 	double	shift_y;
-	double	zoom;
 	double	julia_x;
 	double	julia_y;
 	double	scale;
-	double	x;
-	double	y;
-	double	zx;
-	double	zy;
 	double	cx;
 	double	cy;
 }				t_fractal;
@@ -187,6 +182,10 @@ double		map(double unscaled_num, t_fractal *fractal);
 void		error_params(void);
 // Error formalloc fail
 void		error_malloc(void);
+// Cleans the mlx connection
+void		clean_mlx(t_fractal *fractal);
+// Error message
+void		error(t_fractal *fractal);
 
 /*********** hooks_events **********/
 int			key_handler(int keysym, t_fractal *fractal);

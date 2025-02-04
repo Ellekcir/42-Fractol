@@ -6,7 +6,7 @@
 /*   By: rgriffit <rgriffit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:55:46 by rgriffit          #+#    #+#             */
-/*   Updated: 2025/02/04 12:42:36 by rgriffit         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:35:01 by rgriffit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,16 @@ void	init_fractal(t_fractal *fractal)
 	fractal->mlx_window = mlx_new_window(fractal->mlx_connection,
 			WIDTH, HEIGHT, "Fract-ol");
 	if (fractal->mlx_window == NULL)
-	{
-		free(fractal->mlx_connection);
-		error_malloc();
-	}
+		error(fractal);
 	fractal->image.image_ptr = mlx_new_image(fractal->mlx_connection,
 			WIDTH, HEIGHT);
 	if (fractal->image.image_ptr == NULL)
-	{
-		mlx_destroy_window(fractal->mlx_connection, fractal->mlx_window);
-		free(fractal->mlx_connection);
-		error_malloc();
-	}
+		error(fractal);
 	fractal->image.pixels_ptr = mlx_get_data_addr(fractal->image.image_ptr,
 			&fractal->image.bpp, &fractal->image.line_length,
 			&fractal->image.endian);
+	if (fractal->image.pixels_ptr == NULL)
+		error(fractal);
 	init_data(fractal);
 	init_events(fractal);
 }
