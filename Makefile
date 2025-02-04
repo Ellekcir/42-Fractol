@@ -1,6 +1,8 @@
 #============    COMPILATION        ============
-CC          = cc
-CFLAGS      = -Wall -Werror -Wextra 
+CC          = gcc
+CFLAGS      = -Wall -Werror -Wextra
+CFLAGS 		+= -g -fsanitize=address -fno-omit-frame-pointer
+
 OS          = $(shell uname)
 MAKE        = make -s
 MKDIR       = mkdir -p
@@ -36,11 +38,12 @@ OBJ_DIR     = obj
 #============    FILES              ============
 SRC_FILES   = main.c \
               error_handling.c \
-              init.c \
               utils_maths.c \
               utils_string.c \
               render.c \
-              events.c
+              events.c \
+			  init.c \
+			  colour.c 
 SRC         = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ         = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 INC         = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)

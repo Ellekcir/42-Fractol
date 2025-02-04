@@ -6,12 +6,13 @@
 /*   By: rgriffit <rgriffit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 00:23:42 by rgriffit          #+#    #+#             */
-/*   Updated: 2025/01/31 21:34:36 by rgriffit         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:02:42 by rgriffit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
 
+// String compare with n characters - return 0 if equal
 int	ft_strncmp2(char *s1, char *s2, int n)
 {
 	if (s1 == NULL || s2 == NULL || n <= 0)
@@ -40,6 +41,10 @@ void	to_lowercase(char *s)
 	}
 }
 
+// ALPHA TO DOUBLE
+// similar to atoi, but dealing with floats
+// takes the cmnd line args and
+// converts to long double (typedef ldbl)
 static void	ft_sign(const char *str, int *sign)
 {
 	*sign = 1;
@@ -52,10 +57,6 @@ static void	ft_sign(const char *str, int *sign)
 		str++;
 }
 
-// ALPHA TO DOUBLE
-// similar to atoi, but dealing with floats
-// takes the cmnd line args and
-// converts to long double (typedef ldbl)
 double	atodbl(const char *str)
 {
 	long	whole_part;

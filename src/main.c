@@ -6,7 +6,7 @@
 /*   By: rgriffit <rgriffit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 00:23:42 by rgriffit          #+#    #+#             */
-/*   Updated: 2025/01/31 20:25:28 by rgriffit         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:46:11 by rgriffit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 #include "../inc/fractol.h"
 
-// Creates a new fractal struct with the given parameters
+// Creates a new fractal struct with the given parameters 
 // checks the type of fractal and calls the corresponding function to create it
 // fractal name is assigned the it shall initiate the fractal 
 // render the fractal and loop the connection to keep it running 
 // or it it will show an error warning and shut the program.
 int	main(int argc, char **argv)
 {
-	t_fractal	fractal;
+	t_fractal		fractal;
 
 	if (argc < 2 || argc > 4)
 		error_params();

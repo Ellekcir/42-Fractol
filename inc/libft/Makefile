@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rgriffit <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: rgriffit <rgriffit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 12:53:54 by rgriffit          #+#    #+#              #
-#    Updated: 2024/04/05 03:44:55 by rgriffit         ###   ########.fr        #
+#    Updated: 2025/02/03 17:58:05 by rgriffit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ SRC	= ft_atoi.c \
 	  ft_memcpy.c \
 	  ft_memmove.c \
 	  ft_memset.c \
+	  ft_putchar.c \
+	  ft_putnbr.c \
 	  ft_putchar_fd.c \
 	  ft_putstr_fd.c \
 	  ft_putendl_fd.c \

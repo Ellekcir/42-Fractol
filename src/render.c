@@ -6,21 +6,20 @@
 /*   By: rgriffit <rgriffit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:39:34 by rgriffit          #+#    #+#             */
-/*   Updated: 2025/01/22 19:47:08 by rgriffit         ###   ########.fr       */
+/*   Updated: 2025/02/04 11:34:33 by rgriffit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
 
-// Put a pixel in the image buffer this is to create a whole image before pushing it to the window to make it more seemless
-// Converts x, y coordinates to the pixel's memory location and assigns the color.
-
-static void	my_pixel_put(int x, int y, t_image *image, int color)
+// Put a pixel in the image buffer this is to create a whole image 
+// before pushing it to the window to make it more seemless.
+static void	my_pixel_put(int x_pixel, int y_pixel, t_image *image, int colour)
 {
 	int	offset;
 
-	offset = (y * image->line_length) + (x * (image->bpp / 8));
-	*(unsigned int *)(image->pixels_ptr + offset) = color;
+	offset = (y_pixel * image->line_length) + (x_pixel * (image->bpp / 8));
+	*(unsigned int *)(image->pixels_ptr + offset) = colour;
 }
 
 // toggle between Mandelbrot and Julia set.
@@ -30,13 +29,13 @@ static void	mandel_vs_julia(t_complex *z, t_complex *c, t_fractal *fractal)
 {
 	if (!ft_strncmp(fractal->name, "julia", 5))
 	{
-		c->x = fractal->julia_x;
-		c->y = fractal->julia_y;
+		c->re_x = fractal->julia_x;
+		c->im_y = fractal->julia_y;
 	}
 	else
 	{
-		c->x = z->x;
-		c->y = z->y;
+		c->re_x = z->re_x;
+		c->im_y = z->im_y;
 	}
 }
 
@@ -52,9 +51,14 @@ static void	mandel_vs_julia(t_complex *z, t_complex *c, t_fractal *fractal)
 		 z initially is (0, 0)
 		 c is the point in the complex plane
 		 
- maps the pixel position to the complex plane, iterates using the Mandelbrot or Julia formula, and assigns a color based on the number of iterations before divergence.
+ maps the pixel position to the complex plane, iterates using the 
+ Mandelbrot or Julia formula, and assigns a color based on the 
+ number of iterations before divergence (exits stable area).
+ 
+z = sum_complex(square_complex(z), c);
+z = z^2 + c
 */
-static	void	handle_pixel(int x, int y, t_fractal *fractal)
+static	void	handle_pixel(int x_pixel, int y_pixel, t_fractal *fractal)
 {
 	t_complex	z;
 	t_complex	c;
@@ -62,36 +66,38 @@ static	void	handle_pixel(int x, int y, t_fractal *fractal)
 	int			colour;
 
 	i = 0;
-	z.x = (map(x, -2, +2, 0, WIDTH) * fractal->zoom) + fractal->shift_x;
-	z.y = (map(y, +2, -2, 0, HEIGHT) * fractal->zoom) + fractal->shift_y;
+	z.re_x = (map(x_pixel, fractal) * fractal->scale) + fractal->shift_x;
+	z.im_y = (map(y_pixel, fractal) * fractal->scale) + fractal->shift_y;
 	mandel_vs_julia(&z, &c, fractal);
 	while (i < fractal->iteration_definition)
 	{
 		z = sum_complex(square_complex(z), c);
-		if ((z.x * z.x) + (z.y * z.y) > fractal->chaos_value)
+		if ((z.re_x * z.re_x) + (z.im_y * z.im_y) > fractal->map_boundary)
 		{
-			colour = map(i, BLACK, RED, 0, fractal->iteration_definition);
-			my_pixel_put(x, y, &fractal->image, colour);
+			colour = add_colour(i, fractal->iteration_definition);
+			my_pixel_put(x_pixel, y_pixel, &fractal->image, colour);
 			return ;
 		}
 		++i;
 	}
-	my_pixel_put(x, y, &fractal->image, WHITE);
+	my_pixel_put(x_pixel, y_pixel, &fractal->image, BLACK);
 }
 
-// Iterates through each pixel, calculates its value, and displays the rendered image in the MLX window.
+// Iterates through each pixel, calculates its value, and displays 
+// the rendered image in the MLX window AFTER the entire 
+// image is created.
 void	render_fractal(t_fractal *fractal)
 {
-	int		x;
-	int		y;
+	int		x_pixel;
+	int		y_pixel;
 
-	y = -1;
-	while (++y < HEIGHT)
+	y_pixel = -1;
+	while (++y_pixel < HEIGHT)
 	{
-		x = -1;
-		while (++x < WIDTH)
+		x_pixel = -1;
+		while (++x_pixel < WIDTH)
 		{
-			handle_pixel(x, y, fractal);
+			handle_pixel(x_pixel, y_pixel, fractal);
 		}
 	}
 	mlx_put_image_to_window(fractal->mlx_connection,

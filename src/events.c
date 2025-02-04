@@ -6,7 +6,7 @@
 /*   By: rgriffit <rgriffit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 00:23:42 by rgriffit          #+#    #+#             */
-/*   Updated: 2025/01/31 21:46:52 by rgriffit         ###   ########.fr       */
+/*   Updated: 2025/02/03 23:13:29 by rgriffit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ int	close_handler(t_fractal *fractal)
 		fractal->image.image_ptr);
 	mlx_destroy_window(fractal->mlx_connection,
 		fractal->mlx_window);
-#ifdef __linux__
-	mlx_destroy_display(fractal->mlx_connection);
-#endif
 	free(fractal->mlx_connection);
 	exit(0);
 }
@@ -38,17 +35,21 @@ int	key_handler(int keysym, t_fractal *fractal)
 	if (keysym == KEY_ESCAPE)
 		close_handler(fractal);
 	else if (keysym == KEY_LEFT)
-		fractal->shift_x += (0.5 * fractal->zoom);
+		fractal->shift_x -= (0.5 * fractal->scale);
 	else if (keysym == KEY_RIGHT)
-		fractal->shift_x -= (0.5 * fractal->zoom);
+		fractal->shift_x += (0.5 * fractal->scale);
 	else if (keysym == KEY_UP)
-		fractal->shift_y -= (0.5 * fractal->zoom);
+		fractal->shift_y -= (0.5 * fractal->scale);
 	else if (keysym == KEY_DOWN)
-		fractal->shift_y += (0.5 * fractal->zoom);
-	else if (keysym == KEY_PLUS)
+		fractal->shift_y += (0.5 * fractal->scale);
+	else if (keysym == KEY_C)
 		fractal->iteration_definition += 10;
-	else if (keysym == KEY_MINUS)
+	else if (keysym == KEY_D)
 		fractal->iteration_definition -= 10;
+	else if (keysym == KEY_PLUS)
+		fractal->scale *= 0.95;
+	else if (keysym == KEY_MINUS)
+		fractal->scale *= 1.05;
 	render_fractal(fractal);
 	return (0);
 }
@@ -64,9 +65,9 @@ int	mouse_handler(int button, int x, int y, t_fractal *fractal)
 	(void)x;
 	(void)y;
 	if (button == MOUSE_ZOOM_OUT)
-		fractal->zoom *= 0.95;
+		fractal->scale *= 0.95;
 	else if (button == MOUSE_ZOOM_IN)
-		fractal->zoom *= 1.05;
+		fractal->scale *= 1.05;
 	render_fractal(fractal);
 	return (0);
 }
@@ -74,15 +75,15 @@ int	mouse_handler(int button, int x, int y, t_fractal *fractal)
 // Mouse tracking for Julia set
 // Dynamically updates the Julia set parameters based on mouse movement.
 // x, y: Mouse coordinates
-int	julia_track(int x, int y, t_fractal *fractal)
-{
-	if (!ft_strncmp(fractal->name, "julia", 5))
-	{
-		fractal->julia_x = (map(x, -2, +2, 0, WIDTH)
-				* fractal->zoom) + fractal->shift_x;
-		fractal->julia_y = (map(y, +2, -2, 0, HEIGHT)
-				* fractal->zoom) + fractal->shift_y;
-		render_fractal(fractal);
-	}
-	return (0);
-}
+// int	julia(int x, int y, t_fractal *fractal)
+// {
+// 	if (!ft_strncmp(fractal->name, "julia", 5))
+// 	{
+// 		fractal->julia_x = (map(x, fractal)
+// 				* fractal->zoom) + fractal->shift_x;
+// 		fractal->julia_y = (map(y, fractal)
+// 				* fractal->zoom) + fractal->shift_y;
+// 		render_fractal(fractal);
+// 	}
+// 	return (0);
+// }
