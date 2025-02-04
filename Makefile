@@ -18,15 +18,15 @@ LIBFT_NAME  = LIBFT
 LIBFT_MAKE  = $(MAKE) -C $(LIBFT_DIR)
 
 #============    MINILIBX LIBRARY   ============
-ifeq ($(OS), Linux)
-    MLX_DIR     = inc/mlx_linux
-    MLX         = $(MLX_DIR)/libmlx.a
-    MLX_LINK    = -lmlx -lm -lz -lXext -lX11 -L$(MLX_DIR)
-else
+# ifeq ($(OS), Linux)
+#     MLX_DIR     = inc/mlx_linux
+#     MLX         = $(MLX_DIR)/libmlx.a
+#     MLX_LINK    = -lmlx -lm -lz -lXext -lX11 -L$(MLX_DIR)
+# else
     MLX_DIR     = inc/mlx_opengl
     MLX         = $(MLX_DIR)/libmlx.a
     MLX_LINK    = -lmlx -lm -framework OpenGL -framework AppKit -L$(MLX_DIR)
-endif
+# endif
 MLX_NAME    = MLX
 MLX_MAKE    = $(MAKE) -C $(MLX_DIR)
 

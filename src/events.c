@@ -6,7 +6,7 @@
 /*   By: rgriffit <rgriffit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 00:23:42 by rgriffit          #+#    #+#             */
-/*   Updated: 2025/02/03 23:13:29 by rgriffit         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:15:58 by rgriffit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ int	mouse_handler(int button, int x, int y, t_fractal *fractal)
 	(void)x;
 	(void)y;
 	if (button == MOUSE_ZOOM_OUT)
-		fractal->scale *= 0.95;
-	else if (button == MOUSE_ZOOM_IN)
 		fractal->scale *= 1.05;
+	else if (button == MOUSE_ZOOM_IN)
+		fractal->scale *= 0.95;
 	render_fractal(fractal);
 	return (0);
 }

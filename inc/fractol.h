@@ -6,7 +6,7 @@
 /*   By: rgriffit <rgriffit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 21:20:45 by rgriffit          #+#    #+#             */
-/*   Updated: 2025/02/03 22:46:07 by rgriffit         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:44:17 by rgriffit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,6 @@ int			close_handler(t_fractal *fractal);
 int			mouse_handler(int button, int x, int y, t_fractal *fractal);
 int			julia(int x, int y, t_fractal *fractal);
 /*********** colour **********/
-int	add_colour(int iteration, int max_iterations);
+int			add_colour(int iteration, int max_iterations);
 
 #endif

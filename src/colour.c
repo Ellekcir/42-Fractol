@@ -6,7 +6,7 @@
 /*   By: rgriffit <rgriffit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 22:38:08 by rgriffit          #+#    #+#             */
-/*   Updated: 2025/02/04 11:52:34 by rgriffit         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:16:33 by rgriffit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,21 @@
 // complete a full cycle, covering all rainbow colors.
 
 //////////////////// VIBRANT COLOUR ////////////////////
-int	add_colour(int iteration, int max_iterations)
-{
-	double	t;
-	int		red; 
-	int		green;
-	int		blue;
+// int	add_colour(int iteration, int max_iterations)
+// {
+// 	double	t;
+// 	int		red;
+// 	int		green;
+// 	int		blue;
 
-	if (iteration == max_iterations)
-		return (BLACK);
-	t = (double)iteration / max_iterations * 6.0;
-	red = (int)(sin(t) * 127 + 128);
-	green = (int)(sin(t + 2) * 127 + 128);
-	blue = (int)(sin(t + 4) * 127 + 128);
-
-	return ((red << 16) | (green << 8) | blue);
-}
+// 	if (iteration == max_iterations)
+// 		return (BLACK);
+// 	t = (double)iteration / max_iterations * 6.0;
+// 	red = (int)(sin(t) * 127 + 128);
+// 	green = (int)(sin(t + 2) * 127 + 128);
+// 	blue = (int)(sin(t + 4) * 127 + 128);
+// 	return ((red << 16) | (green << 8) | blue);
+// }
 
 //////////////// BLACK & WHITE ///////////////////////
 // int	add_colour(int iteration, int max_iterations)
@@ -50,22 +49,21 @@ int	add_colour(int iteration, int max_iterations)
 // }
 
 //////////////////// FLOOR IS LAVA ////////////////////
-//int	add_colour(int iteration, int max_iterations)
-//{
-// 	double	t;
-//	int		red; 
-//	int		green;
-//	int		blue;
-//
-//	if (iteration == max_iterations)
-//		return (BLACK);
-//	t = (double)iteration / max_iterations;
-//	red = (int)(255 * t);
-//	green = (int)(255 * pow(t, 1.5));
-//	blue = (int)(50 * pow(t, 3));
-//	return ((red << 16) | (green << 8) | blue);
-//}
+int	add_colour(int iteration, int max_iterations)
+{
+	double	t;
+	int		red;
+	int		green;
+	int		blue;
 
+	if (iteration == max_iterations)
+		return (BLACK);
+	t = (double)iteration / max_iterations;
+	red = (int)(255 * t);
+	green = (int)(255 * pow(t, 1.5));
+	blue = (int)(50 * pow(t, 3));
+	return ((red << 16) | (green << 8) | blue);
+}
 
 ////////////////////// RAINBOW ////////////////////////
 /*

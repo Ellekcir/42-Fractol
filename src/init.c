@@ -6,7 +6,7 @@
 /*   By: rgriffit <rgriffit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:55:46 by rgriffit          #+#    #+#             */
-/*   Updated: 2025/02/04 12:30:36 by rgriffit         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:42:36 by rgriffit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	init_fractal(t_fractal *fractal)
 	if (fractal->image.image_ptr == NULL)
 	{
 		mlx_destroy_window(fractal->mlx_connection, fractal->mlx_window);
-		//free(fractal->mlx_connection);
+		free(fractal->mlx_connection);
 		error_malloc();
 	}
 	fractal->image.pixels_ptr = mlx_get_data_addr(fractal->image.image_ptr,
