@@ -265,3 +265,9 @@ When using the Julia set, you can specify the x and y coordinates of the Julia s
 |------------------|-------------------------|
 | Scroll Up       | Zoom in (scale * 0.95)   |
 | Scroll Down     | Zoom out (scale * 1.05)  |
+
+## Example Image
+Below is an example of the fractal visualisation:
+
+![MandelBrot Example](img/Mandelbrot.png)
+![Julia -0.37, 0.6 Example](img/Julia-0.37_0.6.png)
